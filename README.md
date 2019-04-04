@@ -71,7 +71,8 @@ public class ComplexBusinessService{
    **The Instances that Spring manages are called Beans** Beans are the different objects that are managed by the Spring Framework
 
 - Autowiring 
----The process where spring identifies the dependencies, identifies the matches for those identities, and populates them
+
+    The process where spring identifies the dependencies, identifies the matches for those identities, and populates them
 ```
 @Component
 public class ComplexBusinessService{
@@ -81,9 +82,13 @@ public class ComplexBusinessService{
 public class BubbleSortAlgorithm implements SortAlgorithm{
 ```
 - Dependancy Injection 
----We are injecting the sortAlgorithm as a dependancy in the ComplexBusinessService bean
+
+    We are injecting the sortAlgorithm as a dependancy in the ComplexBusinessService bean
+    
 - Inversion of control
----Who creates the SortAlgorithm? **The class that needs the dependency**. We are taking the control that the class has to the spring framework
+
+    Who creates the SortAlgorithm? **The class that needs the dependency**. We are taking the control that the class has to the spring framework
 - IOC Container
 - Application context
----most important IOC Container. The place where **all** the beans are created and managed. All the core logic of the Spring Framework happens here
+
+    most important IOC Container. The place where **all** the beans are created and managed. All the core logic of the Spring Framework happens here
