@@ -40,7 +40,7 @@ ComplexBusinessService businessService = new ComplexBusinessService(sortAlgorith
 
 - How does spring do this? I need to tell it which are the objects it needs to manage and which dependancies the class needs
 
-- **@Component** tells spring it needs to manage instances of ComplexBusinessService
+- **@Component** tells spring it needs to manage instances of ComplexBusinessService and BubbleSortAlgorithm
 
 ```
 @Component
@@ -66,9 +66,22 @@ public class ComplexBusinessService{
 
 ### Terminology
 
-- Beans   **The Instances that Spring manages are called Beans** Beans are the different objects that are managed by the Spring Framework
-- Autowiring
-- Dependancy Injection
+- Beans   
+---**The Instances that Spring manages are called Beans** Beans are the different objects that are managed by the Spring Framework
+- Autowiring 
+---The process where spring identifies the dependencies, identifies the matches for those identities, and populates them
+```
+@Component
+public class ComplexBusinessService{
+  SortAlgorithm sortAlgorithm;
+  
+@Component
+public class BubbleSortAlgorithm implements SortAlgorithm{
+```
+- Dependancy Injection 
+--- We are injecting the sortAlgorithm as a dependancy in the ComplexBusinessService bean
 - Inversion of control
+--- Who creates the SortAlgorithm? **The class that needs the dependency**. We are taking the control that the class has to the spring framework
 - IOC Container
 - Application context
+--- most important IOC Container. The place where **all** the beans are created and managed. All the core logic of the Spring Framework happens here
