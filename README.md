@@ -61,4 +61,14 @@ public class ComplexBusinessService{
   SortAlgorithm sortAlgorithm;
 ```
 
-- Internally, spring would instantiate SortAlgorithm and pass it to ComplexBusinessService
+- Internally, spring would instantiate SortAlgorithm and pass it to ComplexBusinessServic
+
+
+### Terminology
+
+- Beans   **The Instances that Spring manages are called Beans** Beans are the different objects that are managed by the Spring Framework
+- Autowiring
+- Dependancy Injection
+- Inversion of control
+- IOC Container
+- Application context
