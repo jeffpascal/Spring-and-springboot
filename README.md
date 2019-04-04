@@ -64,7 +64,7 @@ public class ComplexBusinessService{
 - Internally, spring would instantiate SortAlgorithm and pass it to ComplexBusinessServic
 
 
-### Terminology
+# Terminology
 
 - Beans   
 
