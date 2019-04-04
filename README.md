@@ -67,7 +67,9 @@ public class ComplexBusinessService{
 ### Terminology
 
 - Beans   
----**The Instances that Spring manages are called Beans** Beans are the different objects that are managed by the Spring Framework
+
+   **The Instances that Spring manages are called Beans** Beans are the different objects that are managed by the Spring Framework
+
 - Autowiring 
 ---The process where spring identifies the dependencies, identifies the matches for those identities, and populates them
 ```
