@@ -105,3 +105,19 @@ public class BubbleSortAlgorithm implements SortAlgorithm{
 - Where to search for beans
 
    We need a component scan in the package where the beans and dependancies are
+   
+   
+   
+```
+		ApplicationContext applicationContext = SpringApplication.run(SpringbasicsApplication.class, args);
+		
+		//Because we use beans we don't need this anymore
+		//BinarySearchImpl binarySearch = new BinarySearchImpl(new BubbleSortAlgorithm());
+		
+		//We get the bean from the application context
+		BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
+		
+		// then invoke the method from the bean
+		int result = binarySearch.binarySearch(new int[] {1, 2,3,4,5}, 2);
+		System.out.println(result);
+```

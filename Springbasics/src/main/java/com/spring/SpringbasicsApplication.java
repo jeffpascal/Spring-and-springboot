@@ -2,6 +2,7 @@ package com.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class SpringbasicsApplication {
@@ -13,10 +14,14 @@ public class SpringbasicsApplication {
 	public static void main(String[] args) {
 		
 		
-		SpringApplication.run(SpringbasicsApplication.class, args);
+		ApplicationContext applicationContext = SpringApplication.run(SpringbasicsApplication.class, args);
 	
-		BinarySearchImpl binarySearch = new BinarySearchImpl(new BubbleSortAlgorithm());
-		int result = binarySearch.binarySearch(new int[] {3,1,2,3},4);
+		//BinarySearchImpl binarySearch = new BinarySearchImpl(new BubbleSortAlgorithm());
+		
+		//Application context
+		BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
+		
+		int result = binarySearch.binarySearch(new int[] {1, 2,3,4,5}, 2);
 		System.out.println(result);
 	
 	}
