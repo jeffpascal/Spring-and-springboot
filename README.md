@@ -93,10 +93,10 @@ public class BubbleSortAlgorithm implements SortAlgorithm{
 
     most important IOC Container. The place where **all** the beans are created and managed. All the core logic of the Spring Framework happens here
 
-    ###Important questions when setting up Spring
-	- What are the beans that spring needs to manage?
-	      We do this by writing **@Component** to specify it as a bean
-	- What are the dependencies for a bean?
-	      We do this by writing **@Autowired** on the dependencies of the bean
-	- Where to search for beans
-          We need a component scan in the package where the beans and dependancies are
+### Important questions when setting up Spring
+- What are the beans that spring needs to manage?
+   We do this by writing **@Component** to specify it as a bean
+- What are the dependencies for a bean?
+   We do this by writing **@Autowired** on the dependencies of the bean
+- Where to search for beans
+   We need a component scan in the package where the beans and dependancies are
