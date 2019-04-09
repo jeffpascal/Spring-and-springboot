@@ -1,29 +1,28 @@
 package com.spring;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import com.spring.basic.BinarySearchImpl;
+import com.spring.scope.PersonDAO;
+
 @SpringBootApplication
 public class SpringbasicsApplication {
 	
-	
-	//What are the beans that spring needs to manage
-	//What are the dependencies for a bean?
-	//Where to search for beans
+	static Logger LOGGER = LoggerFactory.getLogger(SpringbasicsApplication.class);
 	public static void main(String[] args) {
-		
-		
 		ApplicationContext applicationContext = SpringApplication.run(SpringbasicsApplication.class, args);
-	
-		//BinarySearchImpl binarySearch = new BinarySearchImpl(new BubbleSortAlgorithm());
+
+		PersonDAO dao = applicationContext.getBean(PersonDAO.class);
+		PersonDAO dao1 = applicationContext.getBean(PersonDAO.class);
 		
-		//Application context
-		BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
-		
-		int result = binarySearch.binarySearch(new int[] {1, 2,3,4,5}, 2);
-		System.out.println(result);
-	
+		LOGGER.info("{}", dao);
+		LOGGER.info("{}", dao.getJdbcConnection());
+		LOGGER.info("{}", dao1);
+		LOGGER.info("{}", dao.getJdbcConnection());
 	}
 
 }

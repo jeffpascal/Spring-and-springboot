@@ -274,3 +274,45 @@ private SortAlgorithm sortAlgorithm;
 - Prototype - New bean whenever requested
 - Request - One bean per HTTP request
 - Session - One bean per HTTP session
+
+##### The following commands will both get the same bean instance because the default scope of a bean is singleton
+```
+BinarySearchImpl binarySearch = applicationContext.getBean(BinarySearchImpl.class);
+BinarySearchImpl binarySearch1 = applicationContext.getBean(BinarySearchImpl.class);
+```
+
+- To get different instances of beans we need to change the bean type to prototype. We do this with **Scope("prototype")**
+   Now when we run the above two commands we get 2 different instances of BinarySearchImpl.
+   
+ ```
+@Scope("prototype") // makes the bean prototype(which means every time it is created, it gives a new instance instead of the same one
+@Component // tells spring this is a bean
+public class BinarySearchImpl {
+```
+
+- Hardcoding @Scope("prototype") is not very good instead we can use
+```
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+```
+
+- If you have a singleton class that uses a Prototype autowired bean, the bean will have the same values because it uses the instance of the singleton to get the prototype. 
+To fix this, if we want different instances of the autowired bean we use a proxy.
+
+```
+@Component
+public class PersonDAO {
+	
+	@Autowired
+	JdbcConnection jdbcConnection;
+}
+
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode=ScopedProxyMode.TARGET_CLASS)
+public class JdbcConnection {
+	
+}
+```
+- Now every instance of PersonDAO will have a different instance of JdbcConnection
+
+- If we remove the proxy, the JdbcConnection will always have the same insstance
+
