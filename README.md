@@ -179,6 +179,98 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
 #### Solution
 - Adding the @Primary annotation to the algorithm i want to use (giving more importance to one of the components)
 
-## Constructor and setter injection
+## Constructor and setter injection - means we aren't using constructors to inject the dependancies like we did above
 
-   
+- Works without setter and consturctor (if you create a setter or not, spring does the autowiring the same way)
+
+- When do you use setter or constructor injection? Well, setter is most used, Constructor injection is obsolete because if we have many dependencies, the constructor declaration will be too long
+
+
+## Spring projects
+
+- **Spring Boot** most popular for microservices (dev applications quickly)
+- **Spring Cloud** develop cloud-native applications. You can use Spring Cloud to move a Spring Boot microservice to the cloud
+- **Spring Data** Consistent data access. 
+- **Spring Integration** Solves problems with Integration. Helps us with connecting enterprise applications easily
+- **Spring Batch** 
+- **Spring Security** provides solutions to make applications secure
+- **Sprint HATEOS** return related links for the user to know where to go next, like links to related actions
+
+#### Why is spring popular? 
+- Writing testable code easily
+- No Plumbing Code (Spring makes all exceptions unchecked, so no need to handle exceptions)
+- Flexible Architecture spring is very modular
+
+### in-depth Autowiring
+- Turns out, autowiring can be done by type and name :
+
+```
+	@Autowired
+	private SortAlgorithm quickSortAlgorithm;
+```
+
+- This means, even though @Primary wasn't used, Spring knows i want QuickSortAlgorithm class;
+- @Primary has **higher precendence** over the name of the variable(name autowiring)
+
+- **@Qualifier**
+
+   @Qualifier can be used in conflicts where multiple candidates are present for autowiring. It is used to select one using a name
+
+```
+@Component
+@Qualifier("quick")
+public class QuickSortAlgorithm implements SortAlgorithm {
+	@Override
+	public int[] sort(int[] numbers) {
+		return numbers;
+	}
+}
+
+
+@Autowired
+@Qualifier("quick")
+private SortAlgorithm quickSortAlgorithm;
+```
+
+- Usage : you use **@Primary** when you know there is a definite favourite (faster, more efficient). You use **@Qualifier** when you need different beans for different tasks.
+- Autowiring by name can be used over both of those.
+
+#### Example
+
+```
+@Component
+@Qualifier("bubble")
+@Primary
+public class BubbleSortAlgorithm implements SortAlgorithm{
+	public int[] sort(int[] numbers) {
+		return numbers;
+	}
+}
+```
+- Will use the Qualifier here over name autowiring
+
+```
+@Autowired
+@Qualifier("bubble")
+private SortAlgorithm quickSortAlgorithm;
+```
+- will use bubbleSortAlgorithm because of name autowiring
+
+```
+@Autowired
+private SortAlgorithm bubbleSortAlgorithm;
+```
+
+- will use bubbleSortAlgorithm because @Primary
+
+```
+@Autowired
+private SortAlgorithm sortAlgorithm;
+```
+
+### Bean Scope
+  ###### Default: singleton
+- Singleton - One instance per Spring Context
+- Prototype - New bean whenever requested
+- Request - One bean per HTTP request
+- Session - One bean per HTTP session
