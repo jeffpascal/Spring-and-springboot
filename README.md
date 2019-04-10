@@ -316,3 +316,13 @@ public class JdbcConnection {
 
 - If we remove the proxy, the JdbcConnection will always have the same insstance
 
+- Even the same instances of PersonDAO will have different JdbcConnections
+
+#### Component Scanning
+
+- If your Application that starts spring is in another package when you try to run you get the following exception:
+```
+java.lang.TypeNotPresentException: Type org.springframework.jdbc.CannotGetJdbcConnectionException not present
+```
+
+To fix this we use **@ComponentScan("com.spring.componentscan")** where we specify the package we want Spring to do the **component scan**
