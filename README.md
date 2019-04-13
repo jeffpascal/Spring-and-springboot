@@ -326,3 +326,5 @@ java.lang.TypeNotPresentException: Type org.springframework.jdbc.CannotGetJdbcCo
 ```
 
 To fix this we use **@ComponentScan("com.spring.componentscan")** where we specify the package we want Spring to do the **component scan**
+
+- Turns out i'm incapabable to recreate the most basic of learnt functionality -- working on it
