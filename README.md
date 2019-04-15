@@ -326,3 +326,57 @@ java.lang.TypeNotPresentException: Type org.springframework.jdbc.CannotGetJdbcCo
 ```
 
 To fix this we use **@ComponentScan("com.spring.componentscan")** where we specify the package we want Spring to do the **component scan**
+
+### Lifecycle of a bean @PostConstruct @PreDestroy
+
+- you can use **@PostConstruct** to make operations on a bean before it gets created as seen below
+
+```
+postConstruct
+Creating shared instance of singleton bean 'componentJdbcConnection'
+Creating shared instance of singleton bean 'componentPersonDAO'
+```
+
+- you can use **@PreDestroy** to make operations on a bean before it gets destroyed (after you do all operations you wanted)
+
+```
+	@PostConstruct
+	public void postConstruct() {
+		System.out.println("postConstruct");
+		LOGGER.info("postConstruct");
+	}
+	
+	@PreDestroy
+	public void preDestroy() {
+		System.out.println("PREdESTROY");
+		LOGGER.info("PREdESTROY");
+	}
+```
+
+### Moving from Spring Boot to plain Spring Framework
+
+- Removed the dependency in pom.xml to just have spring and not spring boot
+
+#### Changes made to migrate from Spring Boot to Spring
+
+```
+@Configuration
+@ComponentScan
+public class SpringbasicsApplication {
+	
+	
+	//What are the beans that spring needs to manage
+	//What are the dependencies for a bean?
+	//Where to search for beans
+	public static void main(String[] args) {
+		
+		
+		ApplicationContext applicationContext = 
+				new AnnotationConfigApplicationContext(SpringbasicsApplication.class);
+				//SpringApplication.run(SpringbasicsApplication.class, args);
+
+```
+
+- **@Configuration** tells Spring that this class is a configuration class
+- **@ComponentScan** tells spring to do the component scan in the package we are in (can also specify another package with ())
+- We need to create a new ApplicationConext with new AnnotationConfigApplicationContext(SpringbasicsApplication.class);
