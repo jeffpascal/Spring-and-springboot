@@ -327,6 +327,7 @@ java.lang.TypeNotPresentException: Type org.springframework.jdbc.CannotGetJdbcCo
 
 To fix this we use **@ComponentScan("com.spring.componentscan")** where we specify the package we want Spring to do the **component scan**
 
+<<<<<<< HEAD
 ### Lifecycle of a bean @PostConstruct @PreDestroy
 
 - you can use **@PostConstruct** to make operations on a bean before it gets created as seen below
@@ -380,3 +381,6 @@ public class SpringbasicsApplication {
 - **@Configuration** tells Spring that this class is a configuration class
 - **@ComponentScan** tells spring to do the component scan in the package we are in (can also specify another package with ())
 - We need to create a new ApplicationConext with new AnnotationConfigApplicationContext(SpringbasicsApplication.class);
+=======
+- Turns out i'm incapabable to recreate the most basic of learnt functionality -- working on it
+>>>>>>> refs/remotes/origin/dev
