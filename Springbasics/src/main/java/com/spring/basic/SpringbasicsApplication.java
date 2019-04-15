@@ -1,10 +1,12 @@
 package com.spring.basic;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootApplication
+@Configuration
+@ComponentScan
 public class SpringbasicsApplication {
 	
 	
@@ -14,7 +16,9 @@ public class SpringbasicsApplication {
 	public static void main(String[] args) {
 		
 		
-		ApplicationContext applicationContext = SpringApplication.run(SpringbasicsApplication.class, args);
+		ApplicationContext applicationContext = 
+				new AnnotationConfigApplicationContext(SpringbasicsApplication.class);
+				//SpringApplication.run(SpringbasicsApplication.class, args);
 	
 		//BinarySearchImpl binarySearch = new BinarySearchImpl(new BubbleSortAlgorithm());
 		

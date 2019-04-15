@@ -2,19 +2,20 @@ package com.spring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-import com.spring.basic.BinarySearchImpl;
 import com.spring.scope.PersonDAO;
 
-@SpringBootApplication
+@Configuration
+@ComponentScan("com.spring.scope")
 public class SpringbasicsApplication {
 	
 	static Logger LOGGER = LoggerFactory.getLogger(SpringbasicsApplication.class);
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = SpringApplication.run(SpringbasicsApplication.class, args);
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringbasicsComponentApplication.class);
 
 		PersonDAO dao = applicationContext.getBean(PersonDAO.class);
 		PersonDAO dao1 = applicationContext.getBean(PersonDAO.class);
@@ -23,6 +24,7 @@ public class SpringbasicsApplication {
 		LOGGER.info("{}", dao.getJdbcConnection());
 		LOGGER.info("{}", dao1);
 		LOGGER.info("{}", dao.getJdbcConnection());
+		applicationContext.close();
 	}
 
 }
