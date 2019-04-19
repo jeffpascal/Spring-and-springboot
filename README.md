@@ -2,6 +2,12 @@
 
 Course to understand spring and spring boot. Here i will have my notes
 
+### To-Do
+- Learn Authentication
+- Learn why mvc and rest are so weird together and why i can use them together
+	- and how
+- jpa in depth
+
 ### Dependency injection
 
 
