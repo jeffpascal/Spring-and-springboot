@@ -2,6 +2,9 @@
 
 Course to understand spring and spring boot. Here i will have my notes
 
+##TODO
+- separate into topics
+
 ### Dependency injection
 
 
