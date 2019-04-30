@@ -2,9 +2,19 @@
 
 Course to understand spring and spring boot. Here i will have my notes
 
+
 ##TODO
 - separate into topics
 - add into separate folders
+
+
+### To-Do
+- Learn Authentication
+- Learn why mvc and rest are so weird together and why i can use them together
+	- and how
+- jpa in depth
+
+
 ### Dependency injection
 
 
@@ -330,7 +340,7 @@ java.lang.TypeNotPresentException: Type org.springframework.jdbc.CannotGetJdbcCo
 
 To fix this we use **@ComponentScan("com.spring.componentscan")** where we specify the package we want Spring to do the **component scan**
 
-<<<<<<< HEAD
+
 - Turns out i'm incapabable to recreate the most basic of learnt functionality -- working on itasdasdasd
 ### Lifecycle of a bean @PostConstruct @PreDestroy
 
@@ -442,4 +452,4 @@ public class SpringbasicsApplication {
 - We need to create a new ApplicationConext with new AnnotationConfigApplicationContext(SpringbasicsApplication.class);
 
 
->>>>>>> branch 'dev' of https://github.com/jeffpascal/Spring-and-springboot.git
+
