@@ -6,6 +6,7 @@ Course to understand spring and spring boot. Here i will have my notes
 ##TODO
 - separate into topics
 - add into separate folders
+- finish first tutorial then personal project
 
 
 ### To-Do
