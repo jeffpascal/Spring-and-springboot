@@ -4,14 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-  <bean id="xmlJdbcConnection" class="/spring-in-depth/src/main/java/com/spring/xml/XMLJdbcConnection.java">
-    <!-- collaborators and configuration for this bean go here -->
+  <bean id="xmlJdbcConnection" class="com.spring.xml.XmlJdbcConnection">
   </bean>
 
-  <bean id="xmlPersonDao" class="/spring-in-depth/src/main/java/com/spring/xml/XMLPersonDAO.java">
-    <!-- collaborators and configuration for this bean go here -->
+  <bean id="xmlPersonDao" class="com.spring.xml.XmlPersonDAO">
+  	<property name="xmlJdbcConnection" ref="xmlJdbcConnection"/>
   </bean>
 
-  <!-- more bean definitions go here -->
 
 </beans>
