@@ -17,7 +17,7 @@ Course to understand spring and spring boot. Here i will have my notes
 
 
 ## External table of contents
-- XML configuration [XMLConfiguration](Spring-and-springboot/Springbasics/src/main/java/com/spring/xml/xml.md)
+- XML configuration [XMLConfiguration](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/main/java/com/spring/xml/xml.md)
 
 ### Dependency injection
 
