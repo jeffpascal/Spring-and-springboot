@@ -1,7 +1,7 @@
 package com.spring.xml;
 
-public class XMLJdbcConnection {
-	public XMLJdbcConnection() {
+public class XmlJdbcConnection {
+	public XmlJdbcConnection() {
 		System.out.println("jdbc connection");
 	}
 }
