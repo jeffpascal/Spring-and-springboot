@@ -6,26 +6,25 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
+import com.spring.properties.SomeExternalService;
 import com.spring.scope.PersonDAO;
 
 @Configuration
-@ComponentScan("com.spring.scope")
-public class SpringbasicsApplication {
+@ComponentScan
+@PropertySource("classpath:app.properties")
+public class SpringbasicsExternalPropertiesApplication {
 
-	static Logger LOGGER = LoggerFactory.getLogger(SpringbasicsApplication.class);
+	static Logger LOGGER = LoggerFactory.getLogger(SpringbasicsExternalPropertiesApplication.class);
 
 	public static void main(String[] args) {
 		try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				SpringbasicsComponentApplication.class)) {
+				SpringbasicsExternalPropertiesApplication.class)) {
 
-			PersonDAO dao = applicationContext.getBean(PersonDAO.class);
-			PersonDAO dao1 = applicationContext.getBean(PersonDAO.class);
+			SomeExternalService service = applicationContext.getBean(SomeExternalService.class);
+			System.out.println(service.returnServiceURL());
 
-			LOGGER.info("{}", dao);
-			LOGGER.info("{}", dao.getJdbcConnection());
-			LOGGER.info("{}", dao1);
-			LOGGER.info("{}", dao.getJdbcConnection());
 			
 		}
 

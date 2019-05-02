@@ -707,14 +707,9 @@ function setDocumentScrollTop(ypos)
 </ul> 
 <pre><code>package com.spring;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.spring.xml.XMLPersonDAO;
 
-@Configuration
-@ComponentScan(&quot;com.spring.scope&quot;)
 public class SpringbasicsXMLContextApplication {
 
 		public static void main(String[] args) {
@@ -731,6 +726,28 @@ public class SpringbasicsXMLContextApplication {
 
 }
 
+</code></pre> 
+<h2> <a id="doing-a-component-scan-for-other-beans-with-annotations-from-the-xml-for-package-comspring" class="anchor" href="#doing-a-component-scan-for-other-beans-with-annotations-from-the-xml-for-package-comspring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Doing a component scan for other beans with annotations from the xml for package com.spring</h2> 
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+	
+	&lt;context:component-scan base-package=&quot;com.spring&quot;&gt;&lt;/context:component-scan&gt;
+  
+  &lt;bean id=&quot;xmlJdbcConnection&quot; class=&quot;com.spring.xml.XmlJdbcConnection&quot;&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id=&quot;xmlPersonDao&quot; class=&quot;com.spring.xml.XmlPersonDAO&quot;&gt;
+  	&lt;property name=&quot;xmlJdbcConnection&quot; ref=&quot;xmlJdbcConnection&quot;/&gt;
+  &lt;/bean&gt;
+
+
+&lt;/beans&gt;
 </code></pre>
 </body>
 </html>
