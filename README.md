@@ -3,21 +3,10 @@
 Course to understand spring and spring boot. Here i will have my notes
 
 
-##TODO
-- separate into topics
-- add into separate folders
-- finish first tutorial then personal project
-
-
-### To-Do
-- Learn Authentication
-- Learn why mvc and rest are so weird together and why i can use them together
-	- and how
-- jpa in depth
-
 
 ## External table of contents
 - XML configuration [XMLConfiguration](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/main/java/com/spring/xml/xml.md)
+- Unit Testing [Unit Testing](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/test/java/com/simpletest/testing.md)
 
     + [Dependency injection](#dependency-injection)
 - [Terminology](#terminology)
@@ -48,14 +37,26 @@ Course to understand spring and spring boot. Here i will have my notes
 
 - generated with https://ecotrust-canada.github.io/markdown-toc/
 
-##### Table of Contents  
-[Headers](#headers)  
-[Emphasis](#emphasis)  
+
+
+
+## TODO
+- separate into topics
+- add into separate folders
+- finish first tutorial then personal project
+
+
+### To-Do
+- Learn Authentication
+- Learn why mvc and rest are so weird together and why i can use them together
+	- and how
+- jpa in depth
+
 
 ### Dependency injection
 
 
-```
+```java
 public class ComplexBusinessService{
   SortAlgorithm sortAlgorithm;
 ```
@@ -71,7 +72,7 @@ public class ComplexBusinessService{
 - **Loose coupling** is considered good. We do this by removing the instantiation and creating a constructor
 
 
-```
+```java
 public class ComplexBusinessService{
   SortAlgorithm sortAlgorithm; // = new BubbleSortAlgorithm(); //tight coupling
   
@@ -92,7 +93,7 @@ ComplexBusinessService businessService = new ComplexBusinessService(sortAlgorith
 
 - **@Component** tells spring it needs to manage instances of ComplexBusinessService and BubbleSortAlgorithm
 
-```
+```java
 @Component
 public class ComplexBusinessService{
   SortAlgorithm sortAlgorithm;
@@ -104,7 +105,7 @@ public class BubbleSortAlgorithm implements SortAlgorithm{
 - Now spring knows it needs to manage those 2 classes
 - How to tell Spring that SortAlgorithm is a dependancy? using **@Autowired**
 
-```
+```java
 @Component
 public class ComplexBusinessService{
   @Autowired
@@ -123,7 +124,7 @@ public class ComplexBusinessService{
 - Autowiring 
 
     The process where spring identifies the dependencies, identifies the matches for those identities, and populates them
-```
+```java
 @Component
 public class ComplexBusinessService{
   SortAlgorithm sortAlgorithm;
@@ -158,7 +159,7 @@ public class BubbleSortAlgorithm implements SortAlgorithm{
    
    
    
-```
+```java
 ApplicationContext applicationContext = SpringApplication.run(SpringbasicsApplication.class, args);
 		
 //Because we use beans we don't need this anymore
@@ -185,7 +186,7 @@ Identified candidate component class: file [C:\Users\JeanPascal\git\Spring-and-s
 
 #### Here we see the beans being added to the application context
 
-```
+```java
 Creating shared instance of singleton bean 'springbasicsApplication'
 Creating shared instance of singleton bean 'binarySearchImpl'
 Creating shared instance of singleton bean 'bubbleSortAlgorithm'
@@ -195,7 +196,7 @@ Creating shared instance of singleton bean 'bubbleSortAlgorithm'
    
 - Spring uses this constructor to do the autowiring
    
-```
+```java
 	public BinarySearchImpl(SortAlgorithm sortAlgorithm) {
 		super();
 		this.sortAlgorithm = sortAlgorithm;
@@ -254,7 +255,7 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
 ### in-depth Autowiring
 - Turns out, autowiring can be done by type and name :
 
-```
+```java
 	@Autowired
 	private SortAlgorithm quickSortAlgorithm;
 ```
@@ -266,7 +267,7 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
 
    @Qualifier can be used in conflicts where multiple candidates are present for autowiring. It is used to select one using a name
 
-```
+```java
 @Component
 @Qualifier("quick")
 public class QuickSortAlgorithm implements SortAlgorithm {
@@ -287,7 +288,7 @@ private SortAlgorithm quickSortAlgorithm;
 
 #### Example
 
-```
+```java
 @Component
 @Qualifier("bubble")
 @Primary
@@ -299,21 +300,21 @@ public class BubbleSortAlgorithm implements SortAlgorithm{
 ```
 - Will use the Qualifier here over name autowiring
 
-```
+```java
 @Autowired
 @Qualifier("bubble")
 private SortAlgorithm quickSortAlgorithm;
 ```
 - will use bubbleSortAlgorithm because of name autowiring
 
-```
+```java
 @Autowired
 private SortAlgorithm bubbleSortAlgorithm;
 ```
 
 - will use bubbleSortAlgorithm because @Primary
 
-```
+```java
 @Autowired
 private SortAlgorithm sortAlgorithm;
 ```
@@ -334,21 +335,21 @@ BinarySearchImpl binarySearch1 = applicationContext.getBean(BinarySearchImpl.cla
 - To get different instances of beans we need to change the bean type to prototype. We do this with **Scope("prototype")**
    Now when we run the above two commands we get 2 different instances of BinarySearchImpl.
    
- ```
+ ```java
 @Scope("prototype") // makes the bean prototype(which means every time it is created, it gives a new instance instead of the same one
 @Component // tells spring this is a bean
 public class BinarySearchImpl {
 ```
 
 - Hardcoding @Scope("prototype") is not very good instead we can use
-```
+```java
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 ```
 
 - If you have a singleton class that uses a Prototype autowired bean, the bean will have the same values because it uses the instance of the singleton to get the prototype. 
 To fix this, if we want different instances of the autowired bean we use a proxy.
 
-```
+```java
 @Component
 public class PersonDAO {
 	
@@ -371,7 +372,7 @@ public class JdbcConnection {
 #### Component Scanning
 
 - If your Application that starts spring is in another package when you try to run you get the following exception:
-```
+```java
 java.lang.TypeNotPresentException: Type org.springframework.jdbc.CannotGetJdbcConnectionException not present
 ```
 
@@ -391,7 +392,7 @@ Creating shared instance of singleton bean 'componentPersonDAO'
 
 - you can use **@PreDestroy** to make operations on a bean before it gets destroyed (after you do all operations you wanted)
 
-```
+```java
 	@PostConstruct
 	public void postConstruct() {
 		System.out.println("postConstruct");
@@ -411,7 +412,7 @@ Creating shared instance of singleton bean 'componentPersonDAO'
 
 #### Changes made to migrate from Spring Boot to Spring
 
-```
+```java
 @Configuration
 @ComponentScan
 public class SpringbasicsApplication {
@@ -446,7 +447,7 @@ Creating shared instance of singleton bean 'componentPersonDAO'
 
 - you can use **@PreDestroy** to make operations on a bean before it gets destroyed (after you do all operations you wanted)
 
-```
+```java
 	@PostConstruct
 	public void postConstruct() {
 		System.out.println("postConstruct");
@@ -466,7 +467,7 @@ Creating shared instance of singleton bean 'componentPersonDAO'
 
 #### Changes made to migrate from Spring Boot to Spring
 
-```
+```java
 @Configuration
 @ComponentScan
 public class SpringbasicsApplication {
@@ -519,5 +520,74 @@ try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfi
 - @Service - service layer- provides bussiness logic
 
 ### Reading values from external properties files
+1. Create the properties file in /resources
+	- populate it with a value to be read
 
+- app.properties file
+```app.properties
+external.service.url = http://someserver.dev.com/service
+```
+
+2. We add the following code to the ApplicationStart class that creates the context
+```properties
+@PropertySource("classpath:app.properties")
+```
+
+3. To access the variable defined we use **@Value("")** annotation
+```java
+@Value("${external.service.url}")
+```
+
+- Full code:
+
+	ExternalService class that makes use of the defined variable in the app.properties file
+
+```java
+package com.spring.properties;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SomeExternalService {
+	//from property file
+	//external.service.url
+	@Value("${external.service.url}")
+	private String url;
+	public String returnServiceURL() {
+		return url;
+	}
+}
+```
+
+- SpringbasicsExternalPropertiesApplication.java 
+	
+```java
+package com.spring;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+import com.spring.properties.SomeExternalService;
+import com.spring.scope.PersonDAO;
+
+@Configuration
+@ComponentScan
+@PropertySource("classpath:app.properties")
+public class SpringbasicsExternalPropertiesApplication {
+	public static void main(String[] args) {
+		try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+				SpringbasicsExternalPropertiesApplication.class)) {
+
+			SomeExternalService service = applicationContext.getBean(SomeExternalService.class);
+			System.out.println(service.returnServiceURL());		
+		}
+	}
+}
+```
 
