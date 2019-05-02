@@ -16,6 +16,9 @@ Course to understand spring and spring boot. Here i will have my notes
 - jpa in depth
 
 
+## External table of contents
+- XML configuration [XMLConfiguration](Spring-and-springboot/Springbasics/src/main/java/com/spring/xml/xml.md)
+
 ### Dependency injection
 
 
@@ -442,7 +445,7 @@ public class SpringbasicsApplication {
 	public static void main(String[] args) {
 		
 		
-		ApplicationContext applicationContext = 
+		AnnotationConfigApplicationContext applicationContext = 
 				new AnnotationConfigApplicationContext(SpringbasicsApplication.class);
 				//SpringApplication.run(SpringbasicsApplication.class, args);
 
@@ -452,5 +455,23 @@ public class SpringbasicsApplication {
 - **@ComponentScan** tells spring to do the component scan in the package we are in (can also specify another package with ())
 - We need to create a new ApplicationConext with new AnnotationConfigApplicationContext(SpringbasicsApplication.class);
 
+- We need to close the ApplicationContext with applicationContext.close();
+	- But because AnnotationConfigApplicationContext is an **autoClosable** we can use the **try with ()** and the applicationContext will auto-close even if an exception happens in the code
+```
+try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+				SpringbasicsComponentApplication.class)) {
+}
+```
 
+- To make logger work we need the following in the pom.xml
+```
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+```
 
