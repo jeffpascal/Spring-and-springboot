@@ -19,6 +19,39 @@ Course to understand spring and spring boot. Here i will have my notes
 ## External table of contents
 - XML configuration [XMLConfiguration](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/main/java/com/spring/xml/xml.md)
 
+    + [Dependency injection](#dependency-injection)
+- [Terminology](#terminology)
+    + [Important questions when setting up Spring](#important-questions-when-setting-up-spring)
+  * [Understanding what happens in the background [Console]](#understanding-what-happens-in-the-background--console-)
+      - [Here we see the **component scan** (searches for classes with @Component)](#here-we-see-the---component-scan----searches-for-classes-with--component-)
+      - [Here we see the beans being added to the application context](#here-we-see-the-beans-being-added-to-the-application-context)
+      - [Here we see **autowiring** happening via the **constructor**](#here-we-see---autowiring---happening-via-the---constructor--)
+      - [Dynamic autowiring](#dynamic-autowiring)
+      - [Solution](#solution)
+  * [Constructor and setter injection - means we aren't using constructors to inject the dependancies like we did above](#constructor-and-setter-injection---means-we-aren-t-using-constructors-to-inject-the-dependancies-like-we-did-above)
+  * [Spring projects](#spring-projects)
+      - [Why is spring popular?](#why-is-spring-popular-)
+    + [in-depth Autowiring](#in-depth-autowiring)
+      - [Example](#example)
+    + [Bean Scope](#bean-scope)
+          + [Default: singleton](#default--singleton)
+        * [The following commands will both get the same bean instance because the default scope of a bean is singleton](#the-following-commands-will-both-get-the-same-bean-instance-because-the-default-scope-of-a-bean-is-singleton)
+      - [Component Scanning](#component-scanning)
+    + [Lifecycle of a bean @PostConstruct @PreDestroy](#lifecycle-of-a-bean--postconstruct--predestroy)
+    + [Moving from Spring Boot to plain Spring Framework](#moving-from-spring-boot-to-plain-spring-framework)
+      - [Changes made to migrate from Spring Boot to Spring](#changes-made-to-migrate-from-spring-boot-to-spring)
+    + [Lifecycle of a bean @PostConstruct @PreDestroy](#lifecycle-of-a-bean--postconstruct--predestroy-1)
+    + [Moving from Spring Boot to plain Spring Framework](#moving-from-spring-boot-to-plain-spring-framework-1)
+      - [Changes made to migrate from Spring Boot to Spring](#changes-made-to-migrate-from-spring-boot-to-spring-1)
+    + [@Component vs @Service vs @Repository vs @Controller](#-component-vs--service-vs--repository-vs--controller)
+    + [Reading values from external properties files](#reading-values-from-external-properties-files)
+
+- generated with https://ecotrust-canada.github.io/markdown-toc/
+
+##### Table of Contents  
+[Headers](#headers)  
+[Emphasis](#emphasis)  
+
 ### Dependency injection
 
 
@@ -474,4 +507,17 @@ try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfi
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 ```
+
+
+### @Component vs @Service vs @Repository vs @Controller
+- You can identify the annotation and add functionality over to that specific thing
+- The different annotations allow you to clasify your components into diferent categories and you can apply different logic for each of them
+	- Example: Spring provides a default exception translation facility for @Repository
+
+- @Repository - encapsulating storage, retrieval, and search behaviour typically from a relational database
+- @Controller - mvc pattern
+- @Service - service layer- provides bussiness logic
+
+### Reading values from external properties files
+
 

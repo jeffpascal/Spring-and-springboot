@@ -60,14 +60,9 @@ ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationC
 ```
 package com.spring;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.spring.xml.XMLPersonDAO;
 
-@Configuration
-@ComponentScan("com.spring.scope")
 public class SpringbasicsXMLContextApplication {
 
 		public static void main(String[] args) {
@@ -84,4 +79,28 @@ public class SpringbasicsXMLContextApplication {
 
 }
 
+```
+
+## Doing a component scan for other beans with annotations from the xml for package com.spring
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:component-scan base-package="com.spring"></context:component-scan>
+  
+  <bean id="xmlJdbcConnection" class="com.spring.xml.XmlJdbcConnection">
+  </bean>
+
+  <bean id="xmlPersonDao" class="com.spring.xml.XmlPersonDAO">
+  	<property name="xmlJdbcConnection" ref="xmlJdbcConnection"/>
+  </bean>
+
+
+</beans>
 ```

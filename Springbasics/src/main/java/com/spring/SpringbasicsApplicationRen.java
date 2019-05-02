@@ -11,9 +11,9 @@ import com.spring.scope.PersonDAO;
 
 @Configuration
 @ComponentScan("com.spring.scope")
-public class SpringbasicsApplication {
+public class SpringbasicsApplicationRen {
 
-	static Logger LOGGER = LoggerFactory.getLogger(SpringbasicsApplication.class);
+	static Logger LOGGER = LoggerFactory.getLogger(SpringbasicsApplicationRen.class);
 
 	public static void main(String[] args) {
 		try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
