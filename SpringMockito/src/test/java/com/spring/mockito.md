@@ -103,4 +103,23 @@ public class SomeBusinessMockTest {
 }
 ```
 
+### Mocking List interface
+
+- let's say you want to mock the list.size() method from the List interface
+- you use **when(listMock.size()).thenReturn(int);**
+```java
+	when(listMock.size()).thenReturn(10).thenReturn(20);
+	assertEquals(10, listMock.size());
+	assertEquals(20, listMock.size());
+```
+
+- **Mockito.anyInt()** can be used to mock any input
+```java
+	when(listMock.get(Mockito.anyInt())).thenReturn("SomeString");
+	assertEquals("SomeString", listMock.get(0));
+	assertEquals("SomeString", listMock.get(1));
+	assertEquals("SomeString", listMock.get(2));
+```
+- no matter the input specified by **.anyInt()** the .get method will return SomeString always
+
 	

@@ -14,6 +14,8 @@ public class SomeBusinessStubTest {
 	}
 }
 
+
+
 class DataServiceStub implements DataService{
 	@Override
 	public int[] retrieveAllData() {
