@@ -5,9 +5,11 @@ Course to understand spring and spring boot. Here i will have my notes
 
 
 ## External table of contents
-- XML configuration [XMLConfiguration](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/main/java/com/spring/xml/xml.md)
-- Unit Testing [Unit Testing](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/test/java/com/simpletest/testing.md)
-- Mockito
+- [XMLConfiguration](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/main/java/com/spring/xml/xml.md)
+- [Unit Testing](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/test/java/com/simpletest/testing.md)
+- [Mockito](https://github.com/jeffpascal/Spring-and-springboot/blob/master/SpringMockito/src/test/java/com/spring/mockito.md)
+- Simple junit Testing [junit](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/test/java/com/simpletest/simpleTesting.md)
+- [Spring Tests](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/test/java/com/spring/springTesting.md_
 
     + [Dependency injection](#dependency-injection)
 - [Terminology](#terminology)
