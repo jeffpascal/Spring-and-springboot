@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>C:\Users\JeanPascal\git\Spring-and-springboot\SpringMockito\src\test\java\com\spring\.mockito.md.html</title>
+<title>C:\Users\JeanPascal\git\Spring-and-springboot\Springbasics\src\test\java\com\spring\.springTesting.md.html</title>
 
 
 <style type="text/css">
@@ -639,143 +639,37 @@ function setDocumentScrollTop(ypos)
 
 </head>
 <body class="markdown-body">
-<h2> <a id="mockito" class="anchor" href="#mockito" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mockito</h2> 
+<h2> <a id="testing-with-spring" class="anchor" href="#testing-with-spring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing with spring</h2> 
 <ul> 
- <li>we created a complete class for the mock of DataService</li> 
+ <li>First we need to specify the Context of the test. We do that using @ContextConfiguration and we specify the class that has the defined context in our case that class is out Springbasicapplication class. We do that using the annotation like this:</li> 
 </ul> 
 <div class="highlight highlight-source-java">
- <pre><span class="pl-k">package</span> <span class="pl-smi">com.spring</span>;
+ <pre><span class="pl-k">@ContextConfiguration</span>(<span class="pl-c1">classes</span><span class="pl-k">=</span><span class="pl-smi">SpringbasicsApplication</span><span class="pl-k">.</span>class)</pre>
+</div> 
+<ul> 
+ <li>Secondly, we need to specify a runner for the test to initialise it as a spring application. We do that with the annotation <strong>@RunWith(SpringRunner.class)</strong> </li> 
+</ul> 
+<div class="highlight highlight-source-java">
+ <pre><span class="pl-k">@RunWith</span>(<span class="pl-smi">SpringRunner</span><span class="pl-k">.</span>class)</pre>
+</div> 
+<div class="highlight highlight-source-java">
+ <pre><span class="pl-c"><span class="pl-c">//</span>load context</span>
+<span class="pl-k">@RunWith</span>(<span class="pl-smi">SpringRunner</span><span class="pl-k">.</span>class)
+<span class="pl-k">@ContextConfiguration</span>(<span class="pl-c1">classes</span><span class="pl-k">=</span><span class="pl-smi">SpringbasicsApplication</span><span class="pl-k">.</span>class)
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">BinarySearchTest</span> {
 
-<span class="pl-k">import static</span> <span class="pl-smi">org.junit.Assert.assertEquals</span>;
-
-<span class="pl-k">import</span> <span class="pl-smi">org.junit.Test</span>;
-
-<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">SomeBusinessTest</span> {
+	<span class="pl-c"><span class="pl-c">//</span>get this bean from context</span>
+	<span class="pl-k">@Autowired</span>
+	<span class="pl-smi">BinarySearchImpl</span> binarySearch;
 	
 	<span class="pl-k">@Test</span>
-	<span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">findTheGreatestFromAllData</span>() {
-		<span class="pl-smi">SomeBusinessImpl</span> bus<span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SomeBusinessImpl</span>(<span class="pl-k">new</span> <span class="pl-smi">DataServiceStub</span>());
-		<span class="pl-k">int</span> result <span class="pl-k">=</span> bus<span class="pl-k">.</span>findTheGreatestFromAllData();
-		assertEquals(<span class="pl-c1">3</span>,result);
-	}
-}
-
-<span class="pl-k">class</span> <span class="pl-en">DataServiceStub</span> <span class="pl-k">implements</span> <span class="pl-e">DataService</span>{
-	<span class="pl-k">@Override</span>
-	<span class="pl-k">public</span> <span class="pl-k">int</span>[] <span class="pl-en">retrieveAllData</span>() {
-		<span class="pl-c"><span class="pl-c">//</span> TODO Auto-generated method stub</span>
-		<span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">int</span>[] {<span class="pl-c1">3</span>,<span class="pl-c1">1</span>,<span class="pl-c1">2</span>};
+	<span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">testBasicScenario</span>() {
+		<span class="pl-k">int</span> actualResult <span class="pl-k">=</span> binarySearch<span class="pl-k">.</span>binarySearch(<span class="pl-k">new</span> <span class="pl-smi">int</span>[] {}, <span class="pl-c1">4</span>);
+		assertEquals(<span class="pl-c1">3</span>, actualResult);
+		<span class="pl-c"><span class="pl-c">//</span>call method on binarySearch</span>
+		<span class="pl-c"><span class="pl-c">//</span>check if value is correct</span>
 	}
 }</pre>
-</div> 
-<ul> 
- <li>We want to test the code above, and to do this we need to create a stub 
-  <ul> 
-   <li>the problem with stubs is that they take a lot of effort to maintain</li> 
-   <li>everytime i add a method to DataService, the stub needs to change too.</li> 
-  </ul> </li> 
-</ul> 
-<h3> <a id="mocking-with-mockito" class="anchor" href="#mocking-with-mockito" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mocking with mockito</h3> 
-<ul> 
- <li> <strong>mock()</strong> method 
-  <ul> 
-   <li>it is used to mock an interface or class</li> 
-  </ul> </li> 
-</ul> 
-<div class="highlight highlight-source-java">
- <pre><span class="pl-smi">DataService</span> dataServiceMock <span class="pl-k">=</span> mock(<span class="pl-smi">DataService</span><span class="pl-k">.</span>class);</pre>
-</div> 
-<ul> 
- <li> <strong>when()</strong> method 
-  <ul> 
-   <li>when is used to set an output for a method of the mocked class</li> 
-  </ul> </li> 
-</ul> 
-<div class="highlight highlight-source-java">
- <pre>when(dataServiceMock<span class="pl-k">.</span>retrieveAllData())<span class="pl-k">.</span>thenReturn(<span class="pl-k">new</span> <span class="pl-smi">int</span>[]{<span class="pl-c1">3</span>});</pre>
-</div> 
-<ul> 
- <li>this way we can easily change what the method returns in different tests</li> 
- <li>we use the contructor to pass the mock</li> 
-</ul> 
-<div class="highlight highlight-source-java">
- <pre><span class="pl-smi">SomeBusinessimpl</span> bussinessImpl <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SomeBusinessImpl</span>(dataServiceMock);</pre>
-</div> 
-<h3> <a id="mockito-annotations" class="anchor" href="#mockito-annotations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mockito Annotations</h3> 
-<ul> 
- <li>In order to use mochito annotations, a <strong>runner</strong> is needed.</li> 
-</ul> 
-<div class="highlight highlight-source-java">
- <pre><span class="pl-k">@RunWith</span>(<span class="pl-smi">MockitoJUnitRunner</span><span class="pl-k">.</span>class)</pre>
-</div> 
-<ul> 
- <li>Annotations: 
-  <ul> 
-   <li> <strong>@Mock</strong> 
-    <ul> 
-     <li>used to mock a class or interface outside of the method</li> 
-     <li>ex:</li> 
-    </ul> <pre><code> @Mock 
- DataService dataServiceMock;
-</code></pre> </li> 
-   <li> <strong>@InjectMocks</strong> 
-    <ul> 
-     <li>automatically injects using constructor of the Mocked classes.</li> 
-    </ul> </li> 
-  </ul> </li> 
- <li>full code example:</li> 
-</ul> 
-<div class="highlight highlight-source-java">
- <pre><span class="pl-k">package</span> <span class="pl-smi">com.spring</span>;
-
-<span class="pl-k">import static</span> <span class="pl-smi">org.junit.Assert.assertEquals</span>;
-<span class="pl-k">import static</span> <span class="pl-smi">org.mockito.Mockito.when</span>;
-
-<span class="pl-k">import</span> <span class="pl-smi">org.junit.Test</span>;
-<span class="pl-k">import</span> <span class="pl-smi">org.junit.runner.RunWith</span>;
-<span class="pl-k">import</span> <span class="pl-smi">org.mockito.InjectMocks</span>;
-<span class="pl-k">import</span> <span class="pl-smi">org.mockito.Mock</span>;
-<span class="pl-k">import</span> <span class="pl-smi">org.mockito.junit.MockitoJUnitRunner</span>;
-
-<span class="pl-k">@RunWith</span>(<span class="pl-smi">MockitoJUnitRunner</span><span class="pl-k">.</span>class)
-<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">SomeBusinessMockTest</span> {
-	
-	<span class="pl-k">@Mock</span>
-	<span class="pl-smi">DataService</span> dataServiceMock;
-	<span class="pl-c"><span class="pl-c">//</span>dataServiceMock is injected in businessImpl using the constructor.</span>
-	<span class="pl-k">@InjectMocks</span>
-	<span class="pl-smi">SomeBusinessImpl</span> businessImpl;
-	
-	<span class="pl-k">@Test</span>
-	<span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">findTheGreatestFromAllData</span>() {
-		
-		when(dataServiceMock<span class="pl-k">.</span>retrieveAllData())<span class="pl-k">.</span>thenReturn(<span class="pl-k">new</span> <span class="pl-smi">int</span>[] {<span class="pl-c1">24</span>,<span class="pl-c1">14</span>,<span class="pl-c1">2</span>});
-		<span class="pl-k">int</span> result <span class="pl-k">=</span> businessImpl<span class="pl-k">.</span>findTheGreatestFromAllData();
-		assertEquals(<span class="pl-c1">24</span>,result);
-	}
-}</pre>
-</div> 
-<h3> <a id="mocking-list-interface" class="anchor" href="#mocking-list-interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mocking List interface</h3> 
-<ul> 
- <li>let's say you want to mock the list.size() method from the List interface</li> 
- <li>you use <strong>when(listMock.size()).thenReturn(int);</strong> </li> 
-</ul> 
-<div class="highlight highlight-source-java">
- <pre>	when(listMock<span class="pl-k">.</span>size())<span class="pl-k">.</span>thenReturn(<span class="pl-c1">10</span>)<span class="pl-k">.</span>thenReturn(<span class="pl-c1">20</span>);
-	assertEquals(<span class="pl-c1">10</span>, listMock<span class="pl-k">.</span>size());
-	assertEquals(<span class="pl-c1">20</span>, listMock<span class="pl-k">.</span>size());</pre>
-</div> 
-<ul> 
- <li> <strong>Mockito.anyInt()</strong> can be used to mock any input</li> 
-</ul> 
-<div class="highlight highlight-source-java">
- <pre>	when(listMock<span class="pl-k">.</span>get(<span class="pl-smi">Mockito</span><span class="pl-k">.</span>anyInt()))<span class="pl-k">.</span>thenReturn(<span class="pl-s"><span class="pl-pds">&quot;</span>SomeString<span class="pl-pds">&quot;</span></span>);
-	assertEquals(<span class="pl-s"><span class="pl-pds">&quot;</span>SomeString<span class="pl-pds">&quot;</span></span>, listMock<span class="pl-k">.</span>get(<span class="pl-c1">0</span>));
-	assertEquals(<span class="pl-s"><span class="pl-pds">&quot;</span>SomeString<span class="pl-pds">&quot;</span></span>, listMock<span class="pl-k">.</span>get(<span class="pl-c1">1</span>));
-	assertEquals(<span class="pl-s"><span class="pl-pds">&quot;</span>SomeString<span class="pl-pds">&quot;</span></span>, listMock<span class="pl-k">.</span>get(<span class="pl-c1">2</span>));</pre>
-</div> 
-<ul> 
- <li>no matter the input specified by <strong>.anyInt()</strong> the .get method will return SomeString always</li> 
-</ul>
+</div>
 </body>
 </html>
