@@ -2,6 +2,8 @@
 
 Course to understand spring and spring boot. Here i will have my notes
 
+TODO:
+- continue course
 
 
 ## External table of contents
