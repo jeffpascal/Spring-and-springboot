@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TimeSupplierEndpoint {
 
-	@GetMapping(value = "/time", produces = "application/json")
+	@GetMapping(value = "/hello", produces = "application/json")
 	public String currentTime() {
 		return "varza";
 	}
