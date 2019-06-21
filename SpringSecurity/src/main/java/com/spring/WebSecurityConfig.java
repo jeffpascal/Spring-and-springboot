@@ -13,7 +13,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
@@ -39,7 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.username("user")
 				.password("password")
 				.roles("USER")
-				.build();
+				.username("admin")
+				.password("admin").build();
 		
 		return new InMemoryUserDetailsManager(user);
 		
