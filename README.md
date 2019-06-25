@@ -4,7 +4,7 @@ Course to understand spring and spring boot. Here i will have my notes
 
 TODO:
 - continue course
-
+- begin project
 
 ## External table of contents
 - [XMLConfiguration](https://github.com/jeffpascal/Spring-and-springboot/blob/master/Springbasics/src/main/java/com/spring/xml/xml.md)
