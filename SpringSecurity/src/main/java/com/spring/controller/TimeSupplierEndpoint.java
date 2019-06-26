@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TimeSupplierEndpoint {
 
-	@GetMapping(value = "/hello", produces = "application/json")
+	@GetMapping(path = "/", produces = "application/json")
 	public String currentTime() {
 		return "varza";
 	}
 	
-	@GetMapping(value = "/secretTime", produces = "application/json")
+	@GetMapping(path = "/secretTime", produces = "application/json")
 	public LocalDate secretCurrentTime() {
 		return LocalDate.now();
 	}
