@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- CSS Dependencies -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="css/styles.css">
+
+<title> Sprint security example</title>
+
+</head>
+<body>
+
+
+	<div th:if="${param.error}">
+		Invalid username and password
+	</div>
+	<div th:if="${param.logout}">
+		You have been logged out
+	</div>
+	<form th:action="@{/login}" method="post">
+		<div><label>User Name : <input type="text" name="username"/> </label></div>
+		<div><label>Password: <input type="password" name="password"/></label></div>
+		<div><input type="submit" value="Sign In"/></div>
+	</form>
+
+	<!-- Optional JavaScript -->	
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script src="css/Shards-2.1.0/js/shards.min.js"></script>
+</body>
+</html>
