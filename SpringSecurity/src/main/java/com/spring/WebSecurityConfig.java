@@ -18,16 +18,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
-		.antMatchers("/", "/home", "/time").permitAll()
-		.anyRequest().authenticated()
+		.antMatchers("/", "/home", "/time").permitAll() //any request matching /, /home, /time can be accessed by anyone
+		.anyRequest().authenticated() //any other request needs to be authenticated
 		.and()
-		.authorizeRequests().antMatchers("/admin/**")
+		.authorizeRequests().antMatchers("/admin/**") //only admin can access /admin/anything
 		.hasRole("ADMIN")
 		.and()
-		.formLogin()
+		.formLogin() // permit all to form login
 		.permitAll()
 		.and()
-		.logout()
+		.logout() //permit all to form logout
 		.permitAll();
 		
 		
