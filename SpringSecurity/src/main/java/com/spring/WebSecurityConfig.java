@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -24,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests().antMatchers("/admin/**") //only admin can access /admin/anything
 		.hasRole("ADMIN")
 		.and()
-		.formLogin() // permit all to form login
+		.formLogin().loginPage("/login") // permit all to form login--- we use loginPage to use custom page
 		.permitAll()
 		.and()
 		.logout() //permit all to form logout
@@ -38,12 +39,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	public UserDetailsService userDetailsService() {
 		UserDetails user = User.withDefaultPasswordEncoder()
 				.username("user")
-				.password("password")
+				.password("user")
 				.roles("USER")
 				.username("admin")
-				.password("admin").build();
+				.password("admin")
+				.roles("ADMIN")
+				.build();
 		
 		return new InMemoryUserDetailsManager(user);
 		
+	}
+	
+//  @Override
+//  protected void configure(
+//      AuthenticationManagerBuilder auth) throws Exception {
+//
+//    auth.authenticationProvider(authProvider);
+//  }
+
+  //configuration of static resources
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/templates/**", "/assets/**");
 	}
 }
