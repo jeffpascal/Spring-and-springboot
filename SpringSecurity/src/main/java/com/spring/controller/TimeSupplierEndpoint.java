@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TimeSupplierEndpoint {
 
-	@GetMapping(path = "/time", produces = "application/json")
+	@GetMapping(path = "/admin/time", produces = "application/json")
 	public LocalDate currentTime() {
 		return LocalDate.MAX;
 	}
