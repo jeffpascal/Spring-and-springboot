@@ -120,3 +120,20 @@ public class MvcConfig implements WebMvcConfigurer {
 ```
 
 ### Custom Authenticator classes
+
+
+### Oauth2
+
+- Understanding Oath2
+- User issues authorization request
+- Gets auth Grant
+- Using auth grant we need to go authorization server to get the access token.
+- We use the access token to get the protected Resource
+- Every request needs to have that token in the request
+
+### Most important Parameters
+- clientId
+- clientSecret - initizaliza process with the server
+- accessTokenUri - uri that app uses to get/renew token
+- userAuthorizationUri - URI where our client app needs to redirect user to make him perform actual authentication with third party that is providing oauth 2 token
+- userInfoUri - URI that the client app can use to access additional info about user

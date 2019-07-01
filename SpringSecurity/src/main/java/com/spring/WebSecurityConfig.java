@@ -20,6 +20,7 @@ import com.spring.authprovider.CustomAuthenticationProvider;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -32,8 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated() // any other request needs to be authenticated
 				.and().authorizeRequests().antMatchers("/admin/**") // only admin can access /admin/anything
 				.hasRole("ADMIN")
-				.and().formLogin() // permit all to form login--- we use loginPage to use custom page
-				.permitAll().and().logout() // permit all to form logout
+				.and().formLogin().loginPage("/login") // permit all to form login--- we use loginPage to use custom page
+				.permitAll()
+				.and().logout() // permit all to form logout
 				.permitAll();
 
 	}

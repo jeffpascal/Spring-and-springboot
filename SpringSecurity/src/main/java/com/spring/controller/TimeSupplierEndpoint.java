@@ -13,6 +13,11 @@ public class TimeSupplierEndpoint {
 		return LocalDate.MAX;
 	}
 	
+	@GetMapping(path = "/time", produces = "application/json")
+	public LocalDate timeti() {
+		return LocalDate.now();
+	}
+	
 	@GetMapping(path = "/userTime", produces = "application/json")
 	public LocalDate lastTime() {
 		return LocalDate.MIN;
