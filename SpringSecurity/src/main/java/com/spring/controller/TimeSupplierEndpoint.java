@@ -22,4 +22,9 @@ public class TimeSupplierEndpoint {
 	public LocalDate secretCurrentTime() {
 		return LocalDate.now();
 	}
+
+	@GetMapping(path = "/time", produces = "application/json")
+	public LocalDate currentTimes() {
+		return LocalDate.now();
+	}
 }
