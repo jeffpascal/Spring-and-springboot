@@ -8,14 +8,14 @@ import { MyserviceService } from "./service/myservice.service";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  title = "font-app";
+  title = "font-app5";
 
   constructor(private dataService: MyserviceService) {}
 
   ngOnInit() {
     this.dataService.sendGetRequest().subscribe((data: string) => {
       console.log(data);
-      this.title = data;
+      this.title = data + "hotreloaded2";
     });
   }
 }
