@@ -2,9 +2,10 @@ package com.spring.controller;
 
 import java.time.LocalDate;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@CrossOrigin(origins = "*")
 @RestController
 public class TimeSupplierEndpoint {
 
@@ -13,7 +14,7 @@ public class TimeSupplierEndpoint {
 		return LocalDate.MAX;
 	}
 	
-	@GetMapping(path = "/userTime", produces = "application/json")
+	@GetMapping(path = "/time", produces = "application/json")
 	public LocalDate lastTime() {
 		return LocalDate.MIN;
 	}
@@ -21,5 +22,10 @@ public class TimeSupplierEndpoint {
 	@GetMapping(path = "/secretTime", produces = "application/json")
 	public LocalDate secretCurrentTime() {
 		return LocalDate.now();
+	}
+
+	@GetMapping(path = "/hello", produces = "application/json")
+	public String secretCurrentTime2() {
+		return "hello";
 	}
 }

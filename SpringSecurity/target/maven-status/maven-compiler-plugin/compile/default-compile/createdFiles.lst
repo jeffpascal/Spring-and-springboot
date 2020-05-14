@@ -1,6 +1,6 @@
-com/spring/authprovider/ThirdPartyAuthProviderClient.class
-com/spring/MvcConfig.class
-com/spring/WebSecurityConfig.class
-com/spring/SpringSecurityApplication.class
-com/spring/authprovider/CustomAuthenticationProvider.class
-com/spring/controller/TimeSupplierEndpoint.class
+com\spring\authprovider\CustomAuthenticationProvider.class
+com\spring\SpringSecurityApplication.class
+com\spring\MvcConfig.class
+com\spring\authprovider\ThirdPartyAuthProviderClient.class
+com\spring\controller\TimeSupplierEndpoint.class
+com\spring\WebSecurityConfig.class
