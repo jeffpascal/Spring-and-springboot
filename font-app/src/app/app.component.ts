@@ -8,7 +8,7 @@ import { MyserviceService } from "./service/myservice.service";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  title = "font-app5";
+  title = "font-app5s";
 
   constructor(private dataService: MyserviceService) {}
 

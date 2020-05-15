@@ -1,17 +1,14 @@
 version: "3"
 services:
   front:
-    image: project
     build:
       context: ./font-app
       dockerfile: Dockerfile
     volumes:
-      - ./font-app:/home/boilerplate
+      - ./font-app:/app
     ports:
-      - 4200:4200  #live reload server is 49153 while normal server is 4200 where changes refresh when browser refreshed
-      - 49153:49153
+      - 4200:4200 
   back:
-    image: spring-front
     build:
       context: ./SpringSecurity
       dockerfile: Dockerfile
